@@ -192,3 +192,99 @@ URL [https://menew.jp/](https://www.walkerplus.com/)
 | Node.js / Yarn | Tailwind CSSやJavaScript関連ライブラリのビルド環境として利用するため。    |
 | RSpec          | テストコードを通してアプリケーションの品質を維持し、安心して機能追加やリファクタリングを行うため。 |
 | Resend         | Deviseの認証メールやパスワード再設定メールを安定して送信するため。              |
+
+## 技術検証（Google Maps API）
+地図機能は本アプリの中核となるため、実装前にテスト用リポジトリを作成し、Google Maps APIおよび関連技術の動作検証を行った。
+
+### 1. 地図の表示
+まずはGoogle Maps JavaScript APIの公式ドキュメントを参考に、地図が正常に表示されるかを検証した。
+
+```html
+<gmp-map
+  center="35.65861,139.70111"
+  zoom="13"
+  map-id="DEMO_MAP_ID">
+  <gmp-advanced-marker
+    position="35.65861,139.70111"
+    title="渋谷駅">
+  </gmp-advanced-marker>
+</gmp-map>
+```
+
+座標を変更することで、任意の位置へ地図を表示し、マーカーを配置できることを確認した。
+
+---
+
+### 2. 住所から緯度・経度を取得する仕組み
+イベント情報を地図へ表示するため、住所から緯度・経度を取得する仕組みを検証した。
+まず、イベント名・住所・緯度・経度を持つテスト用モデルを作成し、住所のみを登録するフォームを作成した。この時点では、緯度・経度は`nil`で保存されることを確認した。
+続いて、Geocoderを導入し、モデルへ以下の設定を追加した。
+
+```ruby
+geocoded_by :address
+after_validation :geocode
+```
+
+また、Railsコンソールでも動作を確認した。
+
+```ruby
+results = Geocoder.search("渋谷駅")
+results.first.coordinates
+#=> [35.658..., 139.701...]
+```
+
+検証中には、
+
+```
+Google API error:
+request denied (API keys with referer restrictions cannot be used with this API.)
+```
+
+というエラーが発生した。
+原因を調査したところ、Google Geocoding APIで利用するAPIキーの制限設定が原因であったため、適切な設定へ変更することで住所から緯度・経度が自動で保存されることを確認した。
+
+---
+
+### 3. 地図上へイベントを表示
+取得した緯度・経度をGoogle Maps JavaScript APIへ渡し、イベントの位置へマーカーを表示する検証を行った。
+
+```javascript
+const marker = new google.maps.Marker({
+  position: {
+    lat: event.latitude,
+    lng: event.longitude
+  },
+  map: map
+});
+```
+
+イベントごとに緯度・経度を渡すことで、複数のイベントを地図上へ表示できることを確認した。
+
+---
+
+### 4. マーカークリック時の情報表示
+マーカーにクリックイベントを追加し、イベント情報を表示する機能を検証した。
+
+```javascript
+marker.addListener("click", () => {
+  infoWindow.open({
+    map: map,
+    anchor: marker
+  });
+});
+```
+
+クリック時にInfoWindowが表示され、イベント名などの情報を確認できることを検証した。
+
+---
+
+### 検証結果
+以上の検証により、
+
+* Google Maps JavaScript APIによる地図表示
+* Google Geocoding APIとGeocoderを利用した住所から緯度・経度への変換
+* 登録したイベント情報を地図上へ表示する仕組み
+* マーカークリック時のイベント情報表示
+
+を実現できることを確認し、本アプリへ実装した。
+
