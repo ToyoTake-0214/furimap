@@ -288,3 +288,7 @@ marker.addListener("click", () => {
 
 を実現できることを確認し、本アプリへ実装した。
 
+## 画面遷移図
+Figma:<BR>
+https://www.figma.com/design/I79trJRF5sYR5gMWZ7SNbT/FuriMAP_%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=16-2&t=ATFSt9Dc0ipOAzTa-1
+
