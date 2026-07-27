@@ -292,3 +292,10 @@ marker.addListener("click", () => {
 Figma:<BR>
 https://www.figma.com/design/I79trJRF5sYR5gMWZ7SNbT/FuriMAP_%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=16-2&t=ATFSt9Dc0ipOAzTa-1
 
+
+## ER図
+draw.io：<br>
+<img width="571" height="552" alt="ER図(frimap)" src="https://github.com/user-attachments/assets/ebcf8421-7caa-47ef-967f-ba363990e889" />
+
+
+
