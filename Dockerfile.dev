@@ -1,0 +1,28 @@
+FROM ruby:3.4.10
+ENV LANG C.UTF-8
+ENV TZ Asia/Tokyo
+
+#必要なパッケージのインストール
+RUN apt-get update -qq \
+  && apt-get install -y ca-certificates curl gnupg \
+  && mkdir -p /etc/apt/keyrings \
+  \
+  # Node.jsの鍵
+  && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
+    | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+  && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" \
+  | tee /etc/apt/sources.list.d/nodesource.list \
+  \
+  ## パッケージのインストール
+  && apt-get update -qq \
+  && apt-get install -y build-essential libpq-dev nodejs
+
+  # Yarn のインストール
+  RUN npm install -g yarn@1.22.22
+
+  WORKDIR /myapp
+  COPY Gemfile Gemfile.lock ./
+  RUN gem install bundler && bundle install
+  COPY . .
+  
+
