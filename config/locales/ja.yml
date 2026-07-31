@@ -1,0 +1,24 @@
+ja:
+  hello: "こんにちは"
+  activerecord:
+    attributes:
+      user:
+        email: メールアドレス
+        password: パスワード
+        remember_me: ログイン状態を保持する
+        password_confirmation: パスワード確認
+        current_password: 現在のパスワード
+  devise:
+    sessions:
+      new:
+        title: ログイン
+        submit: ログイン
+    registrations:
+      new:
+        title: 新規登録
+        submit: 新規登録
+    shared:
+      links:
+        log_in: ログイン
+        sign_up: 新規登録
+        forgot_password: パスワードを忘れましたか？
