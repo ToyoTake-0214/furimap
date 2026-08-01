@@ -112,6 +112,9 @@ GEM
       railties (>= 7.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.16.0)
+      devise (>= 5.0.0)
+      rails-i18n
     drb (2.2.3)
     erb (6.0.6)
     erubi (1.13.1)
@@ -323,6 +326,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  devise-i18n
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
