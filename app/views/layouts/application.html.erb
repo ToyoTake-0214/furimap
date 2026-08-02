@@ -18,11 +18,16 @@
   </head>
 
   <body>
-  <% if user_signed_in? %>
-    <%= render 'shared/header' %>
-  <% else %>
-    <%= render 'shared/before_login_header' %>
-  <% end %>
+    <% if user_signed_in? %>
+      <%= render 'shared/header' %>
+    <% else %>
+      <%= render 'shared/before_login_header' %>
+    <% end %>
+
+    <%# deivseのフラッシュメッセージを表示 %>
+    <p><%= notice %></p>
+    <p><%= alert %></p>
+
     <%= yield %>
     <%= render 'shared/footer' %>
   </body>
