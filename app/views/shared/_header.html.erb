@@ -1,13 +1,13 @@
 <div class="navbar bg-base-100 shadow-sm">
   <div class="flex-1">
-    <a class="btn btn-ghost text-xl">daisyUI</a>
+    <a class="btn btn-ghost text-xl">フリマップ</a>
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }  %>
     </ul>
     <ul class="menu menu-horizontal px-1">
-     <%= link_to "主催者のかたへ", new_user_session_path  %>
+     <%= link_to "イベントの管理", "#"  %>
     </ul>
   </div>
 </div>
