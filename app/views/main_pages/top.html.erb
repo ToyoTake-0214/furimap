@@ -1,2 +1,18 @@
-<h1>MainPages#top</h1>
-<p>Find me in app/views/main_pages/top.html.erb</p>
+<div id="map" style="height: 600px;"></div>
+
+<script>
+  function initMap() {
+    // 地図要素を取得する
+    const mapElement = document.getElementById('map');
+
+    const mapOptions = {
+      center: {lat: 35.6636, lng: 139.6978},
+      zoom: 15
+    };
+
+    const map = new google.maps.Map(mapElement, mapOptions);
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=initMap"></script>
+
