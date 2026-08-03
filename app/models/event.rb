@@ -3,4 +3,5 @@ class Event < ApplicationRecord
   validates :description, presence: true, length: { maximum: 500 }
 
   belongs_to :user
+  has_many :event_schedules, dependent: :destroy
 end
