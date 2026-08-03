@@ -102,6 +102,7 @@ GEM
     crass (1.0.7)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
+    csv (3.3.6)
     date (3.5.1)
     debug (1.11.1)
       irb (~> 1.10)
@@ -115,9 +116,16 @@ GEM
     devise-i18n (1.16.0)
       devise (>= 5.0.0)
       rails-i18n
+    dotenv (3.2.0)
+    dotenv-rails (3.2.0)
+      dotenv (= 3.2.0)
+      railties (>= 6.1)
     drb (2.2.3)
     erb (6.0.6)
     erubi (1.13.1)
+    geocoder (1.8.6)
+      base64 (>= 0.1.0)
+      csv (>= 3.0.0)
     globalid (1.4.0)
       activesupport (>= 6.1)
     i18n (1.15.2)
@@ -327,6 +335,8 @@ DEPENDENCIES
   debug
   devise
   devise-i18n
+  dotenv-rails
+  geocoder
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
