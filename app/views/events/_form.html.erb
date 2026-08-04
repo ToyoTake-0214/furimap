@@ -1,0 +1,48 @@
+<%= form_with model: event, class: "space-y-6" do |f| %>
+
+  <div>
+    <%= f.label :name, "イベント名", class: "label" %>
+    <%= f.text_field :name,
+                     class: "input input-bordered w-full",
+                     placeholder: "例：〇〇公園フリーマーケット" %>
+  </div>
+
+  <div>
+    <%= f.label :description, "イベント内容", class: "label" %>
+    <%= f.text_area :description,
+                    class: "textarea textarea-bordered w-full",
+                    rows: 6,
+                    placeholder: "イベントの内容を入力してください" %>
+  </div>
+
+  <div>
+    <%= f.label :address, "開催場所", class: "label" %>
+    <%= f.text_field :address,
+                     class: "input input-bordered w-full",
+                     placeholder: "例：東京都渋谷区〇〇1-2-3" %>
+  </div>
+
+  <div>
+    <p class="mb-2 font-semibold">
+      開催日
+    </p>
+
+    <div class="space-y-4">
+      <%= f.fields_for :event_schedules do |schedule_form| %>
+        <div>
+          <%= schedule_form.label :event_date,
+                                  "開催日",
+                                  class: "label" %>
+
+          <%= schedule_form.date_field :event_date,
+                                       class: "input input-bordered w-full" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <%= f.submit "登録する",
+                 class: "btn btn-error btn-soft w-full sm:w-auto" %>
+  </div>
+<% end %>

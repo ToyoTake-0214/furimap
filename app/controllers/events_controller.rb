@@ -4,7 +4,7 @@ class EventsController < ApplicationController
 
   def new
     @event = current_user.events.build
-    2.time { @event.event_schedules.build }
+    2.times { @event.event_schedules.build }
   end
 
   def create
@@ -20,7 +20,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:name, :description, :address, event_schedules_attributes: [:event_date])
+    params.require(:event).permit(:name, :description, :address, event_schedules_attributes: [ :event_date ])
   end
-
 end
