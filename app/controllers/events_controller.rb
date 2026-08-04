@@ -4,7 +4,7 @@ class EventsController < ApplicationController
 
   def new
     @event = current_user.events.build
-    2.times { @event.event_schedules.build }
+    10.times { @event.event_schedules.build }
   end
 
   def create
@@ -13,7 +13,8 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to events_path
     else
-      render :new
+      10.times { @event.event_schedules.build }
+      render :new, status: :unprocessable_entity
     end
   end
 
