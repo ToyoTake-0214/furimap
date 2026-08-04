@@ -4,6 +4,7 @@ class Event < ApplicationRecord
 
   belongs_to :user
   has_many :event_schedules, dependent: :destroy
+  accepts_nested_attributes_for :event_schedules
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
