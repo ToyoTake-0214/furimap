@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root "main_pages#top"
-  resources :events, only: [ :index, :new, :create, :edit, :update ]
+  resources :events, only: [ :index, :new, :create, :edit, :update, :destroy ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
