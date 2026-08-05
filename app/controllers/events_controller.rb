@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [ :edit, :update ]
+  before_action :set_event, only: [ :edit, :update, :destroy ]
   def index
     @events = current_user.events.order(created_at: :desc)
   end
@@ -33,6 +33,11 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy
+    @event.destroy!
+    redirect_to events_path, status: :see_other
+  end
+
   private
 
   def set_event
@@ -45,6 +50,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :description, :address, event_schedules_attributes: %i[id event_date ])
+    params.require(:event).permit(:name, :description, :address, event_schedules_attributes: %i[id event_date _destroy ])
   end
 end

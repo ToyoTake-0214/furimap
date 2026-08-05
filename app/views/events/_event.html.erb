@@ -24,7 +24,7 @@
                   class: "btn btn-sm btn-outline" %>
 
       <%= link_to "削除",
-                  "#",
+                  event_path(event),
                   data: {
                     turbo_method: :delete,
                     turbo_confirm: "このイベントを削除しますか？"
