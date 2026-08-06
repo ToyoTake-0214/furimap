@@ -1,4 +1,10 @@
-<div class="card min-h-56 border border-dashed border-base-300 bg-base-100 shadow-sm">
+<div class="card min-h-56 overflow-hidden border border-dashed border-base-300 bg-base-100 shadow-sm">
+  <figure>
+    <%= image_tag event.event_image_url,
+                  class: "h-56 w-full object-cover",
+                  alt: event.name %>
+  </figure>
+
   <div class="card-body">
     <div>
       <h2 class="text-2xl font-bold">
