@@ -50,6 +50,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :description, :address, event_schedules_attributes: %i[id event_date _destroy ])
+    params.require(:event).permit(:name, :description, :address, :event_image, :event_image_cache, event_schedules_attributes: %i[id event_date _destroy ])
   end
 end
