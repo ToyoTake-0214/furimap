@@ -65,4 +65,4 @@ gem "devise-i18n"
 
 gem "dotenv-rails"
 gem "geocoder"
-gem "carrierwave"
+gem "carrierwave", "~> 3.0"
