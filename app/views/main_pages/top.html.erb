@@ -9,8 +9,19 @@
       center: {lat: 35.6636, lng: 139.6978},
       zoom: 15
     };
-
+    // 地図を表示
     const map = new google.maps.Map(mapElement, mapOptions);
+
+    // マーカーを表示
+    <% @events.each do |event| %>
+
+      var markerLatLng = new google.maps.LatLng({lat: <%= event.latitude %>, lng: <%= event.longitude %>});
+      var marker = new google.maps.Marker({ // マーカーの追加
+        position: markerLatLng, // マーカーを立てる位置を指定
+        map: map // マーカーを立てる地図を指定
+      });
+
+    <% end %>
   }
 </script>
 
