@@ -170,7 +170,6 @@ URL [https://menew.jp/](https://www.walkerplus.com/)
 | daisyUI                    | Tailwind CSSと組み合わせることで、統一感のあるUIコンポーネントを効率良く実装できるため。                |
 | JavaScript                 | Google Maps APIとの連携や、マーカー・情報ウィンドウなどの動的な画面操作を実現するため。                |
 | Google Maps JavaScript API | フリーマーケットの開催場所を地図上へ表示し、ユーザーが位置情報を直感的に把握できるようにするため。                  |
-| Google Places API          | 住所や施設名の入力時に検索候補を表示し、入力の手間や入力ミスを減らして利便性を向上させるため。                    |
 
 ## バックエンド
 | 技術                   | 選定理由                                                          |
@@ -191,8 +190,6 @@ URL [https://menew.jp/](https://www.walkerplus.com/)
 | Amazon S3        | CarrierWaveでアップロードしたイベント画像をクラウド上へ保存し、本番環境でも継続して画像を管理するため。 |
 | Docker         | 開発環境を統一し、環境差異によるトラブルを防ぐため。                        |
 | Node.js / Yarn | Tailwind CSSやJavaScript関連ライブラリのビルド環境として利用するため。    |
-| RSpec          | テストコードを通してアプリケーションの品質を維持し、安心して機能追加やリファクタリングを行うため。 |
-| Resend         | Deviseの認証メールやパスワード再設定メールを安定して送信するため。              |
 
 ## 技術検証（Google Maps API）
 地図機能は本アプリの中核となるため、実装前にテスト用リポジトリを作成し、Google Maps APIおよび関連技術の動作検証を行った。
