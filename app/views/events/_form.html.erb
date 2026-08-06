@@ -17,6 +17,14 @@
   </div>
 
   <div>
+    <%= f.label :event_image, "イベント画像", class: "label" %>
+    <%= f.file_field :event_image,
+                     class: "file-input file-input-bordered w-full",
+                     accept: "image/*" %>
+    <%= f.hidden_field :event_image_cache %>
+  </div>
+
+  <div>
     <%= f.label :address, "開催場所", class: "label" %>
     <%= f.text_field :address,
                      class: "input input-bordered w-full",
@@ -25,7 +33,7 @@
 
   <div>
     <p class="mb-2 font-semibold">
-      開催日(複数登録可能です)
+      開催日（複数登録可能です）
     </p>
 
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
