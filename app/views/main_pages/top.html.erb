@@ -1,13 +1,15 @@
+<button id="btn" class="btn">現在地へ移動</button>
 <div id="map" style="height: 600px;"></div>
 
 <script>
   function initMap() {
     // 地図要素を取得する
     const mapElement = document.getElementById('map');
+    const btnElement = document.getElementById('btn');
 
     const mapOptions = {
       center: {lat: 35.6636, lng: 139.6978},
-      zoom: 15
+      zoom: 8 
     };
     // 地図を表示
     const map = new google.maps.Map(mapElement, mapOptions);
@@ -22,6 +24,18 @@
       });
 
     <% end %>
+
+    btnElement.addEventListener("click", () => {
+
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const { latitude, longitude } = pos.coords;
+
+          map.panTo({ lat: latitude, lng: longitude });
+          map.setZoom(12);
+        }
+      );
+    });
   }
 </script>
 
