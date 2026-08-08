@@ -1,15 +1,30 @@
-<button id="btn" class="btn">現在地へ移動</button>
+<div class="flex justify-center items-center gap-4">
+
+  <select id="prefecture-select" class="select">
+    <% @prefectures.each do |pref| %>
+      <option value="<%= pref["name"] %>" data-lat="<%= pref["lat"] %>" data-lng="<%= pref["lng"] %>">
+        <%= pref["name"] %>
+      </option>
+    <% end %>
+  </select>
+
+  <button id="btn" class="btn">現在地へ移動</button>
+</div>
+
+
 <div id="map" style="height: 600px;"></div>
 
 <script>
   function initMap() {
     // 地図要素を取得する
+
     const mapElement = document.getElementById('map');
     const btnElement = document.getElementById('btn');
+    const selectElement = document.getElementById('select');
 
     const mapOptions = {
       center: {lat: 35.6636, lng: 139.6978},
-      zoom: 8 
+      zoom: 8
     };
     // 地図を表示
     const map = new google.maps.Map(mapElement, mapOptions);
@@ -36,6 +51,15 @@
         }
       );
     });
+    
+    document.getElementById("prefecture-select").addEventListener("change", (e) => {
+    const selected = e.target.selectedOptions[0];
+    const lat = parseFloat(selected.dataset.lat);
+    const lng = parseFloat(selected.dataset.lng);
+    map.panTo({ lat, lng });
+    map.setZoom(11) // 本来であれば各都道府県に適したズームを設定するのが最適であるが、MVP時点は11を固定
+  });
+
   }
 </script>
 
