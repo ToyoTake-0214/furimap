@@ -5,7 +5,7 @@ class Event < ApplicationRecord
 
 
   belongs_to :user
-  has_many :event_schedules, dependent: :destroy
+  has_many :event_schedules, -> { order(:event_date) }, dependent: :destroy
   accepts_nested_attributes_for :event_schedules, reject_if: :all_blank, allow_destroy: true
 
   geocoded_by :address
