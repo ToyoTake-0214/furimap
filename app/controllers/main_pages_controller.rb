@@ -33,6 +33,7 @@ class MainPagesController < ApplicationController
       event: {
         id: event.id,
         name: event.name,
+        description: event.description,
         address: event.address,
         image_url: event.event_image_url
       }
