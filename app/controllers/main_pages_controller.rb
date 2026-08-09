@@ -12,7 +12,7 @@ class MainPagesController < ApplicationController
 
   def build_locations_for_map(events)
     grouped_events = events.group_by do |event|
-      [event.latitude, event.longitude]
+      [ event.latitude, event.longitude ]
     end
 
     grouped_events.map do |(latitude, longitude), grouped_events|
@@ -38,6 +38,5 @@ class MainPagesController < ApplicationController
         image_url: event.event_image_url
       }
     }
-
   end
 end
