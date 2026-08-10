@@ -1,0 +1,17 @@
+ja:
+  activerecord:
+    models:
+      event: イベント
+      event_schedule: 開催日
+
+    attributes:
+      event:
+        name: イベント名
+        description: 概要
+        address: 住所
+        latitude: 緯度
+        longitude: 経度
+        event_image: イベント画像
+
+      event_schedule:
+        event_date: 開催日
