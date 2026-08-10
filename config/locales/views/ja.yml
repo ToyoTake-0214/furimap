@@ -1,0 +1,16 @@
+ja:
+  helper:
+    submit:
+      create: 登録
+      submit: 保存
+      update: 更新
+
+  header:
+    logout: ログアウト
+    home: 地図
+
+  events:
+    event:
+      edit: 編集
+      delete: 削除
+
