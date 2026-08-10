@@ -1,13 +1,20 @@
 <div class="navbar bg-red-300 shadow-sm">
   <div class="flex-1">
-    <%= link_to "フリマップ", root_path, class: "btn btn-ghost text-xl" %>
+    <%= link_to "フリマップ",
+                root_path,
+                class: "btn btn-ghost text-xl" %>
   </div>
 
   <div class="flex-none">
-    <ul class="menu menu-horizontal px-1">
-      <li><%= link_to t("header.home"), root_path %></li>
+    <ul class="menu menu-horizontal items-center px-1">
       <li>
-        <%= link_to "主催者のかたへ", new_user_session_path %>
+        <%= link_to t("header.home"), root_path %>
+      </li>
+
+      <li>
+        <%= link_to "主催者のかたへ",
+                    new_user_session_path,
+                    class: "btn btn-sm btn-outline" %>
       </li>
     </ul>
   </div>

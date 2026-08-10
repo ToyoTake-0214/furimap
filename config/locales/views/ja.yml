@@ -5,11 +5,22 @@ ja:
       submit: 保存
       update: 更新
 
+  main_pages:
+    top:
+      title: フリマップ
+
   header:
     logout: ログアウト
-    home: 地図
+    home: ホーム画面
 
   events:
+    index:
+      title: イベント管理画面
+    new:
+      title: イベント新規作成
+    edit:
+      title: イベント編集
+
     event:
       edit: 編集
       delete: 削除
