@@ -11,7 +11,7 @@ ja:
 
   header:
     logout: ログアウト
-    home: 地図
+    home: ホーム画面
 
   events:
     index:
