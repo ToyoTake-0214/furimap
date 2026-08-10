@@ -15,7 +15,7 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to events_path
     else
-      10.times { @event.event_schedules.build }
+      prepare_event_schedules
       render :new, status: :unprocessable_entity
     end
   end
