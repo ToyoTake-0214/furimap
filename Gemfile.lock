@@ -136,8 +136,28 @@ GEM
     drb (2.2.3)
     erb (6.0.6)
     erubi (1.13.1)
+    excon (1.7.0)
+      logger
     ffi (1.17.4-aarch64-linux-gnu)
     ffi (1.17.4-x86_64-linux-gnu)
+    fog-aws (3.33.2)
+      base64 (>= 0.2, < 0.4)
+      fog-core (~> 2.6)
+      fog-json (~> 1.1)
+      fog-xml (~> 0.1)
+    fog-core (2.6.0)
+      builder
+      excon (~> 1.0)
+      formatador (>= 0.2, < 2.0)
+      mime-types
+    fog-json (1.4.0)
+      fog-core
+      json (~> 2.19)
+    fog-xml (0.1.5)
+      fog-core
+      nokogiri (>= 1.5.11, < 2.0.0)
+    formatador (1.2.3)
+      reline
     geocoder (1.8.6)
       base64 (>= 0.1.0)
       csv (>= 3.0.0)
@@ -174,6 +194,10 @@ GEM
       net-smtp
     marcel (1.0.4)
     matrix (0.4.3)
+    mime-types (3.7.0)
+      logger
+      mime-types-data (~> 3.2025, >= 3.2025.0507)
+    mime-types-data (3.2026.0701)
     mimemagic (0.4.3)
       nokogiri (~> 1)
       rake
@@ -364,6 +388,7 @@ DEPENDENCIES
   devise
   devise-i18n
   dotenv-rails
+  fog-aws
   geocoder
   jbuilder
   jsbundling-rails
