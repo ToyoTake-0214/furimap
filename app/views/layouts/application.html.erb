@@ -2,10 +2,20 @@
 <html>
   <head>
     <title><%= page_title(yield(:title)) %></title>
+    <meta name="description" content="<%= page_description(yield(:description)) %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <%# OGP: X(Twitter)やLINEなどでシェアされた際のプレビュー用タグ %>
+    <meta property="og:title" content="<%= page_title(yield(:title)) %>">
+    <meta property="og:description" content="<%= page_description(yield(:description)) %>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= request.original_url %>">
+    <meta property="og:site_name" content="フリマップ">
+    <meta property="og:image" content="<%= "#{request.base_url}/icon.png" %>">
+    <meta property="og:locale" content="ja_JP">
 
     <%= yield :head %>
 
