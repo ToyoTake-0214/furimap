@@ -51,7 +51,7 @@
       <p class="detail-address text-sm text-base-content/70"></p>
     </div>
 
-    <p class="detail-description mt-5 leading-relaxed"></p>
+    <p class="detail-description mt-5 leading-relaxed whitespace-pre-line"></p>
   </div>
 </template>
 
@@ -74,9 +74,21 @@
     const closeButton = document.getElementById("event-detail-close");
     const eventDetailTemplate = document.getElementById("event-detail-template");
 
+    // 日本国内（離島含む）に収まる範囲。この範囲外への移動・縮小を制限する
+    const JAPAN_BOUNDS = {
+      north: 45.7,
+      south: 20.3,
+      west: 122.8,
+      east: 154.0
+    };
+
     const mapOptions = {
       center: { lat: 35.6636, lng: 139.6978 },
-      zoom: 8
+      zoom: 8,
+      restriction: {
+        latLngBounds: JAPAN_BOUNDS,
+        strictBounds: true
+      }
     };
 
     // 地図を表示
