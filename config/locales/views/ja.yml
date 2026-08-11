@@ -25,3 +25,7 @@ ja:
       edit: 編集
       delete: 削除
 
+  static_pages:
+    privacy:
+      title: プライバシーポリシー
+

@@ -1,0 +1,61 @@
+<% content_for(:title, t(".title")) %>
+
+<div class="min-h-screen bg-base-200">
+  <div class="mx-auto max-w-screen-md px-4 py-8 md:px-8">
+
+    <h1 class="border-l-4 border-error/40 pl-3 text-2xl font-bold">
+      プライバシーポリシー
+    </h1>
+
+    <p class="mt-4 text-base-content/70 leading-relaxed">
+      フリマップ（以下「本サービス」）は、ユーザーの個人情報を適切に保護することを重要な責務と考え、以下の方針に基づき取り扱います。
+    </p>
+
+    <div class="mt-8 space-y-8">
+      <section>
+        <h2 class="text-lg font-bold">1. 個人情報の収集</h2>
+        <p class="mt-2 leading-relaxed">
+          本サービスは、ユーザー登録の際にメールアドレスおよびパスワードを取得します。
+          また、イベントを投稿する場合、投稿されたイベント名・開催場所（住所）・説明文・画像についても本サービス上で管理します。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold">2. 個人情報の利用</h2>
+        <p class="mt-2 leading-relaxed">
+          取得した個人情報は、以下の目的の範囲内で利用します。
+        </p>
+        <ul class="mt-2 list-disc list-inside space-y-1 leading-relaxed">
+          <li>本サービスの提供・運営のため</li>
+          <li>ログイン認証など、ユーザー本人確認のため</li>
+          <li>お問い合わせへの対応など、ユーザーとの連絡のため</li>
+          <li>本サービスの改善・不具合対応のため</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold">3. 個人情報の利用目的の変更</h2>
+        <p class="mt-2 leading-relaxed">
+          本サービスは、利用目的が変更前と関連性を有すると合理的に認められる範囲において、個人情報の利用目的を変更することがあります。
+          利用目的を変更した場合は、変更後の目的について、本サービス上での掲示その他の適切な方法により周知します。
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-bold">4. 個人情報の提供</h2>
+        <p class="mt-2 leading-relaxed">
+          本サービスは、次の場合を除き、個人情報を第三者へ提供しません。
+        </p>
+        <ul class="mt-2 list-disc list-inside space-y-1 leading-relaxed">
+          <li>ユーザー本人の同意がある場合</li>
+          <li>法令に基づき開示が求められた場合</li>
+          <li>本サービスの提供に必要な範囲で、外部サービス（画像保存や地図表示のための連携先など）を利用する場合</li>
+        </ul>
+      </section>
+    </div>
+
+    <p class="mt-10 text-sm text-base-content/50">
+      制定日：<%= Date.current.strftime("%Y年%m月%d日") %>
+    </p>
+  </div>
+</div>
