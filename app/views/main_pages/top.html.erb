@@ -136,6 +136,17 @@
     function showSchedules(schedules) {
       schedulesContainer.replaceChildren();
 
+      if (schedules.length === 0) {
+        const emptyMessage = document.createElement("p");
+        emptyMessage.textContent = "次の開催をお待ちください";
+        emptyMessage.classList.add("text-center", "text-base-content/60", "py-6");
+
+        schedulesContainer.appendChild(emptyMessage);
+        eventDetail.showModal();
+
+        return;
+      }
+
       schedules.forEach((schedule) => {
         const card = buildScheduleCard(schedule);
         const cardElement = card.querySelector(".schedule-card")
