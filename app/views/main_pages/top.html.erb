@@ -3,6 +3,7 @@
 <div class="flex justify-center items-center my-2 gap-4">
 
   <select id="prefecture-select" class="select">
+    <option value="" selected disabled>都道府県から探す</option>
     <% @prefectures.each do |pref| %>
       <option value="<%= pref["name"] %>" data-lat="<%= pref["lat"] %>" data-lng="<%= pref["lng"] %>">
         <%= pref["name"] %>

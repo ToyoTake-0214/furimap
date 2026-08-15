@@ -41,6 +41,14 @@
         <div>
           <%= schedule_form.date_field :event_date,
                                        class: "input input-bordered w-full" %>
+
+          <% if schedule_form.object.persisted? %>
+            <label class="label cursor-pointer justify-start gap-2">
+              <%= schedule_form.check_box :_destroy,
+                                          class: "checkbox checkbox-sm" %>
+              削除
+            </label>
+          <% end %>
         </div>
       <% end %>
     </div>
