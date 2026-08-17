@@ -44,6 +44,10 @@
 
 <template id="event-detail-template">
   <div>
+    <button type="button" class="detail-back btn btn-sm btn-ghost -ml-2 mb-3">
+      ← 一覧に戻る
+    </button>
+
     <img class="detail-image w-full h-56 object-cover rounded-lg" alt="">
 
     <h3 class="detail-name text-xl font-bold mt-4"></h3>
@@ -75,6 +79,9 @@
     const scheduleTemplate = document.getElementById("schedule-card-template");
     const closeButton = document.getElementById("event-detail-close");
     const eventDetailTemplate = document.getElementById("event-detail-template");
+
+    // 一覧に戻るために、表示していた開催日カードの一覧を覚えておくための変数
+    let currentSchedules = [];
 
     // 日本国内（離島含む）に収まる範囲。この範囲外への移動・縮小を制限する
     const JAPAN_BOUNDS = {
@@ -116,12 +123,17 @@
     function buildScheduleDetail(schedule) {
       const detail = eventDetailTemplate.content.cloneNode(true);
 
+      const detail_back = detail.querySelector(".detail-back");
+
       const detail_image = detail.querySelector(".detail-image");
       const detail_name = detail.querySelector(".detail-name");
       const detail_date = detail.querySelector(".detail-date");
       const detail_address = detail.querySelector(".detail-address");
       const detail_description = detail.querySelector(".detail-description");
 
+      detail_back.addEventListener("click", () => {
+        showSchedules(currentSchedules);
+      });
 
       detail_image.src = schedule.event.image_url;
       detail_image.alt = schedule.event.name;
@@ -133,9 +145,10 @@
 
       return detail;
     }
-      
+
     // プレビューを表示
     function showSchedules(schedules) {
+      currentSchedules = schedules;
       schedulesContainer.replaceChildren();
 
       if (schedules.length === 0) {
