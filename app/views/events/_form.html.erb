@@ -36,7 +36,7 @@
       開催日（複数登録可能です）
     </p>
 
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+    <div class="grid gap-4 sm:grid-cols-2">
       <%= f.fields_for :event_schedules do |schedule_form| %>
         <div>
           <%= schedule_form.date_field :event_date,
