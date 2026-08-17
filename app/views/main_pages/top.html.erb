@@ -36,7 +36,9 @@
 
     <div class="card-body p-4">
       <p class="event-name font-bold"></p>
-      <p class="event-date text-sm text-base-content/60"></p>
+      <p class="text-sm text-base-content/60">
+        <span class="text-base-content/50">開催日：</span><span class="event-date"></span>
+      </p>
       <p class="text-xs text-base-content/50 text-right">詳細はこちら ›</p>
     </div>
   </div>
@@ -53,11 +55,17 @@
     <h3 class="detail-name text-xl font-bold mt-4"></h3>
 
     <div class="mt-3 space-y-2">
-      <p class="detail-date text-sm font-medium"></p>
-      <p class="detail-address text-sm text-base-content/70"></p>
+      <p class="text-sm font-medium">
+        <span class="text-base-content/50">開催日：</span><span class="detail-date"></span>
+      </p>
+      <p class="text-sm text-base-content/70">
+        <span class="text-base-content/50">住所：</span><span class="detail-address"></span>
+      </p>
     </div>
 
-    <p class="detail-description mt-5 leading-relaxed whitespace-pre-line"></p>
+    <p class="mt-5 leading-relaxed whitespace-pre-line">
+      <span class="text-base-content/50 font-semibold block mb-1">概要</span><span class="detail-description"></span>
+    </p>
   </div>
 </template>
 
