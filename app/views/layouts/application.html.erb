@@ -26,7 +26,7 @@
     <%= favicon_link_tag("favicon.ico") %>
   </head>
 
-  <body>
+  <body class="flex min-h-screen flex-col">
     <% if user_signed_in? %>
       <%= render 'shared/header' %>
     <% else %>
@@ -37,7 +37,10 @@
     <p><%= notice %></p>
     <p><%= alert %></p>
 
-    <%= yield %>
+    <main class="flex-1">
+      <%= yield %>
+    </main>
+
     <%= render 'shared/footer' %>
   </body>
 </html>
