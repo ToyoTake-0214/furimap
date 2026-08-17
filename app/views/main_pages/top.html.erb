@@ -1,17 +1,21 @@
 <script id="map-locations-data" type="application/json"><%= raw json_escape(@locations_for_map.to_json) %></script>
 
-<div class="flex justify-center items-center my-2 gap-4">
+<div class="flex h-full flex-col">
+  <div class="flex justify-center items-center my-2 gap-4">
 
-  <select id="prefecture-select" class="select">
-    <option value="" selected disabled>都道府県から探す</option>
-    <% @prefectures.each do |pref| %>
-      <option value="<%= pref["name"] %>" data-lat="<%= pref["lat"] %>" data-lng="<%= pref["lng"] %>">
-        <%= pref["name"] %>
-      </option>
-    <% end %>
-  </select>
+    <select id="prefecture-select" class="select">
+      <option value="" selected disabled>都道府県から探す</option>
+      <% @prefectures.each do |pref| %>
+        <option value="<%= pref["name"] %>" data-lat="<%= pref["lat"] %>" data-lng="<%= pref["lng"] %>">
+          <%= pref["name"] %>
+        </option>
+      <% end %>
+    </select>
 
-  <button id="btn" class="btn">現在地へ移動</button>
+    <button id="btn" class="btn">現在地へ移動</button>
+  </div>
+
+  <div id="map" class="flex-1"></div>
 </div>
 
 <dialog id="event-detail" class="modal">
@@ -69,8 +73,6 @@
   </div>
 </template>
 
-<div id="map" style="height: 600px;"></div>
-
 <script>
   function initMap() {
     // 地図要素を取得
@@ -101,7 +103,7 @@
 
     const mapOptions = {
       center: { lat: 35.6636, lng: 139.6978 },
-      zoom: 8,
+      zoom: 7,
       restriction: {
         latLngBounds: JAPAN_BOUNDS,
         strictBounds: true
