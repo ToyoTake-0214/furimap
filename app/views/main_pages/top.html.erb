@@ -1,7 +1,9 @@
 <script id="map-locations-data" type="application/json"><%= raw json_escape(@locations_for_map.to_json) %></script>
 
 <div class="flex flex-1 flex-col">
-  <div class="flex justify-center items-center my-2 gap-4">
+  <div class="flex flex-nowrap justify-center items-center my-2 gap-2 px-4 overflow-x-auto">
+    <label for="event-date-search" class="text-sm text-base-content/60 whitespace-nowrap">開催日から探す</label>
+    <input type="date" id="event-date-search" class="input">
 
     <select id="prefecture-select" class="select">
       <option value="" selected disabled>都道府県から探す</option>
@@ -10,12 +12,13 @@
           <%= pref["name"] %>
         </option>
       <% end %>
-    </select>
-
-    <button id="btn" class="btn">現在地へ移動</button>
+    </select> 
   </div>
 
-  <div id="map" class="flex-1"></div>
+  <div class="relative flex-1">
+    <div id="map" class="absolute inset-0"></div>
+    <button id="btn" class="btn btn-lg absolute top-4 left-4 z-10 rounded-full bg-red-300 hover:bg-red-400 border-none text-lg px-8 py-4">現在地へ移動</button>
+  </div>
 </div>
 
 <dialog id="event-detail" class="modal">
@@ -104,6 +107,7 @@
     const mapOptions = {
       center: { lat: 35.6636, lng: 139.6978 },
       zoom: 7,
+      mapTypeControl: false,
       restriction: {
         latLngBounds: JAPAN_BOUNDS,
         strictBounds: true
