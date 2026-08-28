@@ -93,6 +93,9 @@
     const closeButton = document.getElementById("event-detail-close");
     const eventDetailTemplate = document.getElementById("event-detail-template");
 
+    // 検索用の検索情報
+    const dateSearchElement = document.getElementById("event-date-search");
+
     // 一覧に戻るために、表示していた開催日カードの一覧を覚えておくための変数
     let currentSchedules = [];
 
@@ -199,24 +202,38 @@
 
     }
 
-    // 地点ごとにマーカーを表示
-    locations.forEach((location) => {
-      const marker = new google.maps.Marker({
-        position: {
-          lat: location.latitude,
-          lng: location.longitude
-        },
-        map: map,
-        icon: {
-          url: "<%= asset_path('furima_marker.png') %>",
-          scaledSize: new google.maps.Size(40, 60)
-        }
-      });
+    // 現在表示中のマーカーを覚えておく（描画し直すたびに前のマーカーを消すため）
+    let markers = [];
 
-      marker.addListener("click", () => {
-        showSchedules(location.schedules);
+    // 与えられたlocationsを元にマーカーを描画する
+    function renderMarkers(locationsToShow) {
+      // 前回描画したマーカーを地図から消す
+      markers.forEach((marker) => marker.setMap(null));
+      markers = [];
+
+      locationsToShow.forEach((location) => {
+        const marker = new google.maps.Marker({
+          position: {
+            lat: location.latitude,
+            lng: location.longitude
+          },
+          map: map,
+          icon: {
+            url: "<%= asset_path('furima_marker.png') %>",
+            scaledSize: new google.maps.Size(40, 60)
+          }
+        });
+
+        marker.addListener("click", () => {
+          showSchedules(location.schedules);
+        });
+
+        markers.push(marker);
       });
-    });
+    }
+
+    // 初期表示
+    renderMarkers(filterLocations());
 
     // プレビューを閉じる
     closeButton.addEventListener("click", () => {
@@ -243,6 +260,43 @@
 
         map.panTo({ lat, lng });
         map.setZoom(11);
+      });
+
+    // 開催日でlocationsを絞り込む
+    function filterLocations() {
+      const selectedDate = dateSearchElement.value;
+
+      // 日付が選ばれていなければ、絞り込まず全件を返す
+      if (!selectedDate) {
+        return locations;
+      }
+
+      const filteredLocations = [];
+
+      locations.forEach((location) => {
+        const matchingSchedules = [];
+
+        // このlocationのschedulesの中から、選んだ日付と一致するものだけ集める
+        location.schedules.forEach((schedule) => {
+          if (schedule.event_date === selectedDate) {
+            matchingSchedules.push(schedule);
+          }
+        });
+
+        // 一致する開催日が1つでもあれば、そのlocationを結果に追加する
+        if (matchingSchedules.length > 0) {
+          filteredLocations.push({
+            latitude: location.latitude,
+            longitude: location.longitude,
+            schedules: matchingSchedules
+          });
+        }
+      });
+      return filteredLocations;
+    }
+    // 絞り込みを変更する
+      dateSearchElement.addEventListener("change", () => {
+        renderMarkers(filterLocations());
       });
   }
 </script>
