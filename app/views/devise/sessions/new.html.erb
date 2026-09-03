@@ -17,6 +17,8 @@
                  as: resource_name,
                  url: session_path(resource_name)) do |f| %>
 
+      <%= f.hidden_field :role, value: "organizer" %>
+
       <div class="form-control mb-6">
         <%= f.label :email,
                     class: "label justify-start" %>
