@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :require_organizer!
   before_action :set_event, only: [ :edit, :update, :destroy ]
   def index
     @events = current_user.events.order(created_at: :desc)
@@ -39,6 +40,10 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def require_organizer!
+    redirect_to root_path, alert: "主催者登録が必要です" unless current_user.organizer?
+  end
 
   def set_event
     @event = current_user.events.find(params[:id])
