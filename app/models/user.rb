@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
-         # :validatable は外す
+  # :validatable は外す
 
   enum :role, { organizer: 0, general: 1 }
 
