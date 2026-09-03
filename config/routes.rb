@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions" }
+
+  devise_scope :user do
+    get  "general/sign_up", to: "general/registrations#new",    as: :new_general_registration
+    post "general/sign_up", to: "general/registrations#create", as: :general_registration
+  end
+
   root "main_pages#top"
   resources :events, only: [ :index, :new, :create, :edit, :update, :destroy ]
   get "privacy", to: "static_pages#privacy"
