@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: { organizer: 0, general: 1 }
+  enum :role, { organizer: 0, general: 1 }
 
   has_many :events
 end
