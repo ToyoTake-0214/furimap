@@ -9,8 +9,6 @@ Rails.application.routes.draw do
     post "general/sign_in", to: "general/sessions#create", as: :general_session
   end
 
-  end
-
   root "main_pages#top"
   resources :events, only: [ :index, :new, :create, :edit, :update, :destroy ]
   get "privacy", to: "static_pages#privacy"
