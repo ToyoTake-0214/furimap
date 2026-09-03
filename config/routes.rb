@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   devise_scope :user do
     get  "general/sign_up", to: "general/registrations#new",    as: :new_general_registration
     post "general/sign_up", to: "general/registrations#create", as: :general_registration
+
+    get  "general/sign_in", to: "general/sessions#new",    as: :new_general_session
+    post "general/sign_in", to: "general/sessions#create", as: :general_session
+  end
+
   end
 
   root "main_pages#top"
