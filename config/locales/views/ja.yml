@@ -12,6 +12,7 @@ ja:
   header:
     logout: ログアウト
     home: ホーム画面
+    login: ログイン
 
   events:
     index:
