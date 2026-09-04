@@ -4,6 +4,7 @@ class MainPagesController < ApplicationController
   def top
     @events = Event.where.not(latitude: nil, longitude: nil).includes(:event_schedules)
     @prefectures ||= YAML.load_file(Rails.root.join("config/prefectures.yml"))
+    @favorites_by_event_id = current_user ? current_user.favorites.index_by(&:event_id) : {}
 
     @locations_for_map = build_locations_for_map(@events)
   end
@@ -35,7 +36,11 @@ class MainPagesController < ApplicationController
         name: event.name,
         description: event.description,
         address: event.address,
-        image_url: event.event_image_url
+        image_url: event.event_image_url,
+        favorite_button_html: current_user ? render_to_string(
+          partial: "favorites/favorite_button",
+          locals: { event: event, favorite: @favorites_by_event_id[event.id] }
+        ) : nil
       }
     }
   end

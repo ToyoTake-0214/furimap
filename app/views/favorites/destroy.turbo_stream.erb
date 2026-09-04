@@ -1,0 +1,5 @@
+<%= turbo_stream.replace_all ".favorite-button-event-#{@favorite.event_id}" do %>
+  <%= render "favorites/favorite_button", event: @favorite.event, favorite: nil %>
+<% end %>
+
+<%= turbo_stream.remove @favorite %>
