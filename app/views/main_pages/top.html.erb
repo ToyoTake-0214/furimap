@@ -36,7 +36,7 @@
 </dialog>
 
 <template id="schedule-card-template">
-  <div class="schedule-card card card-side bg-base-100 border border-base-200 shadow-sm cursor-pointer transition hover:shadow-md mb-3">
+  <div class="schedule-card card card-side bg-base-100 border border-base-200 shadow-sm cursor-pointer transition hover:shadow-md mb-3 relative">
     <figure class="w-32 shrink-0">
       <img class="event-image h-24 w-full object-cover" alt="">
     </figure>
@@ -48,6 +48,9 @@
       </p>
       <p class="text-xs text-base-content/50 text-right">詳細はこちら ›</p>
     </div>
+
+    <div class="favorite-button-slot absolute top-2 right-2"></div>
+
   </div>
 </template>
 
@@ -57,7 +60,10 @@
       ← 一覧に戻る
     </button>
 
-    <img class="detail-image w-full h-56 object-cover rounded-lg" alt="">
+    <div class="relative">
+      <img class="detail-image w-full h-56 object-cover rounded-lg" alt="">
+      <div class="favorite-button-slot absolute top-2 right-2"></div>
+    </div>
 
     <h3 class="detail-name text-xl font-bold mt-4"></h3>
 
@@ -127,12 +133,18 @@
       const image = card.querySelector(".event-image");
       const name = card.querySelector(".event-name");
       const date = card.querySelector(".event-date");
+      const favoriteButtonSlot = card.querySelector(".favorite-button-slot");
 
       image.src = schedule.event.image_url;
       image.alt = schedule.event.name;
 
       name.textContent = schedule.event.name;
       date.textContent = schedule.event_date;
+
+      if (schedule.event.favorite_button_html) {
+        favoriteButtonSlot.innerHTML = schedule.event.favorite_button_html;
+        favoriteButtonSlot.addEventListener("click", (e) => e.stopPropagation());
+      }
 
       return card;
     }
@@ -147,6 +159,7 @@
       const detail_date = detail.querySelector(".detail-date");
       const detail_address = detail.querySelector(".detail-address");
       const detail_description = detail.querySelector(".detail-description");
+      const favoriteButtonSlot = detail.querySelector(".favorite-button-slot");
 
       detail_back.addEventListener("click", () => {
         showSchedules(currentSchedules);
@@ -159,6 +172,10 @@
       detail_date.textContent = schedule.event_date;
       detail_address.textContent = schedule.event.address;
       detail_description.textContent = schedule.event.description;
+
+      if (schedule.event.favorite_button_html) {
+        favoriteButtonSlot.innerHTML = schedule.event.favorite_button_html;
+      }
 
       return detail;
     }
