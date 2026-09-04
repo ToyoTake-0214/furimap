@@ -4,6 +4,7 @@ class MainPagesController < ApplicationController
   def top
     @events = Event.where.not(latitude: nil, longitude: nil).includes(:event_schedules)
     @prefectures ||= YAML.load_file(Rails.root.join("config/prefectures.yml"))
+    @favorite_event_ids = current_user ? current_user.favorite_events.pluck(:id) : []
 
     @locations_for_map = build_locations_for_map(@events)
   end
