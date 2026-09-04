@@ -30,6 +30,12 @@ ja:
     privacy:
       title: プライバシーポリシー
 
+  favorites:
+    index:
+      title: 保存したイベント一覧
+    favorite:
+      destroy: 保存解除
+
   general:
     registrations:
       new:
