@@ -1,0 +1,37 @@
+<div class="card min-h-56 overflow-hidden border border-dashed border-base-300 bg-base-100 shadow-sm">
+  <figure>
+    <%= image_tag favorite.event.event_image_url,
+                  class: "h-56 w-full object-cover",
+                  alt: favorite.event.name %>
+  </figure>
+
+  <div class="card-body">
+    <div>
+      <h2 class="text-2xl font-bold">
+        <%= favorite.event.name %>
+      </h2>
+
+      <p class="mt-3 font-semibold">
+        開催日
+      </p>
+
+      <div class="mt-1">
+        <% favorite.event.event_schedules.order(:event_date).each do |schedule| %>
+          <p class="text-base-content/70">
+            <%= schedule.event_date %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card-actions mt-auto justify-end">
+      <%= link_to t("favorites.favorite.destroy"),
+                  favorite_path(favorite),
+                  data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "保存を解除しますか？"
+                  },
+                  class: "btn btn-sm btn-error btn-outline" %>
+    </div>
+  </div>
+</div>

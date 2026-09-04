@@ -1,0 +1,38 @@
+<% content_for(:title, t(".title")) %>
+<div class="min-h-screen bg-base-200">
+  <div class="mx-auto max-w-screen-xl px-4 py-8 md:px-8">
+
+    <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h1 class="border-l-4 border-error/40 pl-3 text-2xl font-bold">
+          保存したイベント一覧
+        </h1>
+
+        <p class="mt-2 text-base-content/60">
+          保存したイベントの確認・保存解除ができます
+        </p>
+      </div>
+    </div>
+
+    <div class="divider my-4"></div>
+
+    <% if @favorites.present? %>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <%= render @favorites %>
+      </div>
+    <% else %>
+      <div class="card border border-base-300 bg-base-100 shadow-sm">
+        <div class="card-body items-center py-12 text-center">
+          <p class="text-base-content/60">
+            まだ保存したイベントはありません
+          </p>
+
+          <%= link_to "地図からフリマを探す",
+                      root_path,
+                      class: "btn btn-error btn-soft mt-4" %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

@@ -11,6 +11,12 @@
         <%= link_to t("header.home"), root_path %>
       </li>
 
+      <% if current_user.general? %>
+        <li>
+          <%= link_to "保存したイベント", favorites_path %>
+        </li>
+      <% end %>
+
       <% if current_user.organizer? %>
         <li>
           <%= link_to "イベントの管理",

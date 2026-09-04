@@ -16,6 +16,8 @@ class User < ApplicationRecord
   validates_length_of       :password, minimum: Devise.password_length.min, maximum: Devise.password_length.max, allow_blank: true
 
   has_many :events
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_events, through: :favorites, source: :event
 
   private
 
