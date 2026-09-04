@@ -33,8 +33,6 @@ ja:
   favorites:
     index:
       title: 保存したイベント一覧
-    favorite:
-      destroy: 保存解除
 
   general:
     registrations:
