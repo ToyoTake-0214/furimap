@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   root "main_pages#top"
   resources :events, only: [ :index, :new, :create, :edit, :update, :destroy ]
+  resources :favorites, only: [ :index, :create, :destroy ]
   get "privacy", to: "static_pages#privacy"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
