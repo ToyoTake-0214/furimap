@@ -11,11 +11,13 @@
         <%= link_to t("header.home"), root_path %>
       </li>
 
-      <li>
-        <%= link_to "イベントの管理",
-                    events_path,
-                    class: "btn btn-sm btn-outline" %>
-      </li>
+      <% if current_user.organizer? %>
+        <li>
+          <%= link_to "イベントの管理",
+                      events_path,
+                      class: "btn btn-sm btn-outline" %>
+        </li>
+      <% end %>
 
       <li>
         <%= link_to t("header.logout"),
