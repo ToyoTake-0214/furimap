@@ -38,7 +38,7 @@
 <template id="schedule-card-template">
   <div class="schedule-card card card-side bg-base-100 border border-base-200 shadow-sm cursor-pointer transition hover:shadow-md mb-3 relative">
     <figure class="w-32 shrink-0">
-      <img class="event-image h-24 w-full object-cover" alt="">
+      <img class="event-image view-detail-link h-24 w-full object-cover" alt="">
     </figure>
 
     <div class="card-body p-4">
@@ -46,7 +46,7 @@
       <p class="text-sm text-base-content/60">
         <span class="text-base-content/50">開催日：</span><span class="event-date"></span>
       </p>
-      <p class="text-xs text-base-content/50 text-right">詳細はこちら ›</p>
+      <p class="view-detail-link text-xs text-base-content/50 text-right">詳細はこちら ›</p>
     </div>
 
     <div class="favorite-button-slot absolute top-2 right-2"></div>
@@ -143,7 +143,6 @@
 
       if (schedule.event.favorite_button_html) {
         favoriteButtonSlot.innerHTML = schedule.event.favorite_button_html;
-        favoriteButtonSlot.addEventListener("click", (e) => e.stopPropagation());
       }
 
       return card;
@@ -198,10 +197,12 @@
 
       schedules.forEach((schedule) => {
         const card = buildScheduleCard(schedule);
-        const cardElement = card.querySelector(".schedule-card")
+        const viewDetailLinks = card.querySelectorAll(".view-detail-link");
 
-        cardElement.addEventListener("click", () => {
-          showScheduleDetail(schedule);
+        viewDetailLinks.forEach((element) => {
+          element.addEventListener("click", () => {
+            showScheduleDetail(schedule);
+          });
         });
 
         schedulesContainer.appendChild(card);
