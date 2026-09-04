@@ -25,13 +25,7 @@
     </div>
 
     <div class="card-actions mt-auto justify-end">
-      <%= link_to t("favorites.favorite.destroy"),
-                  favorite_path(favorite),
-                  data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "保存を解除しますか？"
-                  },
-                  class: "btn btn-sm btn-error btn-outline" %>
+      <%= render "favorites/favorite_button", event: favorite.event, favorite: favorite %>
     </div>
   </div>
 </div>
