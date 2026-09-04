@@ -12,6 +12,7 @@ ja:
   header:
     logout: ログアウト
     home: ホーム画面
+    login: ログイン
 
   events:
     index:
@@ -28,4 +29,14 @@ ja:
   static_pages:
     privacy:
       title: プライバシーポリシー
+
+  general:
+    registrations:
+      new:
+        title: ユーザー新規登録
+        sign_up: アカウント登録
+    sessions:
+      new:
+        title: ユーザーログイン
+        sign_in: ログイン
 

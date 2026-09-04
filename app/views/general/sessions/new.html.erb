@@ -1,13 +1,19 @@
 <% content_for(:title, t(".title")) %>
 <div class="min-h-screen bg-base-100">
   <div class="mx-auto max-w-3xl px-6 py-24">
+    <%= link_to "← 戻る", root_path, class: "btn btn-ghost btn-sm -ml-2 mb-4" %>
+
     <h1 class="mb-6 text-3xl font-bold">
       ユーザーログイン
     </h1>
 
     <%= link_to "初めて登録されるユーザーはこちら",
                 new_general_registration_path,
-                class: "btn btn-error mb-12 w-full text-lg font-normal text-black" %>
+                class: "btn btn-error mb-4 w-full text-lg font-normal text-black" %>
+
+    <%= link_to "フリマ主催者はこちら",
+                new_user_session_path,
+                class: "btn btn-outline mb-12 w-full text-lg font-normal" %>
 
     <h2 class="mb-6 text-3lg font-bold">
       メールアドレスとパスワードでログイン
