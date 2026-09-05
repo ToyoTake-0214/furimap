@@ -6,7 +6,7 @@
     <input type="date" id="event-date-search" class="input">
 
     <select id="prefecture-select" class="select">
-      <option value="" selected disabled>都道府県から探す</option>
+      <option value="" selected disabled>エリアから探す</option>
       <% @prefectures.each do |pref| %>
         <option value="<%= pref["name"] %>" data-lat="<%= pref["lat"] %>" data-lng="<%= pref["lng"] %>">
           <%= pref["name"] %>
@@ -17,7 +17,7 @@
 
   <div class="relative flex-1">
     <div id="map" class="absolute inset-0"></div>
-    <button id="btn" class="btn btn-lg absolute top-4 left-4 z-10 rounded-full bg-red-300 hover:bg-red-400 border-none text-lg px-8 py-4">現在地へ移動</button>
+    <button id="btn" class="btn btn-lg absolute bottom-8 right-4 z-10 rounded-full bg-red-300 hover:bg-red-400 border-none text-lg px-8 py-4">▲ 現在地へ</button>
   </div>
 </div>
 
@@ -119,6 +119,10 @@
       center: { lat: 35.6636, lng: 139.6978 },
       zoom: 7,
       mapTypeControl: false,
+      zoomControl: false,
+      streetViewControl: false,
+      fullscreenControl: false,
+      rotateControl: false,
       restriction: {
         latLngBounds: JAPAN_BOUNDS,
         strictBounds: true
