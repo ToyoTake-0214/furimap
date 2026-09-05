@@ -58,10 +58,13 @@
       <img class="event-image view-detail-link h-24 w-full object-cover" alt="">
     </figure>
 
-    <div class="card-body p-4 pr-16">
-      <p class="event-name font-bold"></p>
+    <div class="card-body p-4 pr-16 min-w-0">
+      <p class="event-name font-bold truncate"></p>
       <p class="text-sm text-base-content/60">
         <span class="text-base-content/50">開催日：</span><span class="event-date"></span>
+      </p>
+      <p class="text-sm text-base-content/60">
+        <span class="text-base-content/50">時間：</span><span class="event-time"></span>
       </p>
       <p class="view-detail-link text-xs text-base-content/50 text-right">詳細はこちら ›</p>
     </div>
@@ -151,6 +154,12 @@
     // 地図を表示
     const map = new google.maps.Map(mapElement, mapOptions);
 
+    // 「2026-09-05」のような日付文字列を「2026年9月5日」の表示に変換する
+    function formatEventDate(dateString) {
+      const [ year, month, day ] = dateString.split("-");
+      return `${year}年${Number(month)}月${Number(day)}日`;
+    }
+
     // 開催日カードを作る
     function buildScheduleCard(schedule) {
       const card = scheduleTemplate.content.cloneNode(true);
@@ -158,13 +167,15 @@
       const image = card.querySelector(".event-image");
       const name = card.querySelector(".event-name");
       const date = card.querySelector(".event-date");
+      const time = card.querySelector(".event-time");
       const favoriteButtonSlot = card.querySelector(".favorite-button-slot");
 
       image.src = schedule.event.image_url;
       image.alt = schedule.event.name;
 
       name.textContent = schedule.event.name;
-      date.textContent = schedule.event_date;
+      date.textContent = formatEventDate(schedule.event_date);
+      time.textContent = schedule.event.event_time;
 
       if (schedule.event.favorite_button_html) {
         favoriteButtonSlot.innerHTML = schedule.event.favorite_button_html;
@@ -187,7 +198,7 @@
       detail_image.alt = schedule.event.name;
 
       detail_name.textContent = schedule.event.name;
-      detail_date.textContent = schedule.event_date;
+      detail_date.textContent = formatEventDate(schedule.event_date);
       detail_address.textContent = schedule.event.address;
       detail_description.textContent = schedule.event.description;
 
