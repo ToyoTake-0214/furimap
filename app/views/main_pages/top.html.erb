@@ -58,10 +58,13 @@
       <img class="event-image view-detail-link h-24 w-full object-cover" alt="">
     </figure>
 
-    <div class="card-body p-4 pr-16">
-      <p class="event-name font-bold"></p>
+    <div class="card-body p-4 pr-16 min-w-0">
+      <p class="event-name font-bold truncate"></p>
       <p class="text-sm text-base-content/60">
         <span class="text-base-content/50">開催日：</span><span class="event-date"></span>
+      </p>
+      <p class="text-sm text-base-content/60">
+        <span class="text-base-content/50">時間：</span><span class="event-time"></span>
       </p>
       <p class="view-detail-link text-xs text-base-content/50 text-right">詳細はこちら ›</p>
     </div>
@@ -84,8 +87,17 @@
       <p class="text-sm font-medium">
         <span class="text-base-content/50">開催日：</span><span class="detail-date"></span>
       </p>
+      <p class="text-sm font-medium">
+        <span class="text-base-content/50">時間：</span><span class="detail-time"></span>
+      </p>
       <p class="text-sm text-base-content/70">
         <span class="text-base-content/50">住所：</span><span class="detail-address"></span>
+      </p>
+      <p class="detail-store-count-wrapper text-sm text-base-content/70">
+        <span class="text-base-content/50">出店数：</span><span class="detail-store-count"></span>店
+      </p>
+      <p class="detail-url-wrapper text-sm text-base-content/70">
+        <span class="text-base-content/50">URL：</span><a class="detail-url link link-primary break-all" target="_blank" rel="noopener"></a>
       </p>
     </div>
 
@@ -151,6 +163,12 @@
     // 地図を表示
     const map = new google.maps.Map(mapElement, mapOptions);
 
+    // 「2026-09-05」のような日付文字列を「2026年9月5日」の表示に変換する
+    function formatEventDate(dateString) {
+      const [ year, month, day ] = dateString.split("-");
+      return `${year}年${Number(month)}月${Number(day)}日`;
+    }
+
     // 開催日カードを作る
     function buildScheduleCard(schedule) {
       const card = scheduleTemplate.content.cloneNode(true);
@@ -158,13 +176,15 @@
       const image = card.querySelector(".event-image");
       const name = card.querySelector(".event-name");
       const date = card.querySelector(".event-date");
+      const time = card.querySelector(".event-time");
       const favoriteButtonSlot = card.querySelector(".favorite-button-slot");
 
       image.src = schedule.event.image_url;
       image.alt = schedule.event.name;
 
       name.textContent = schedule.event.name;
-      date.textContent = schedule.event_date;
+      date.textContent = formatEventDate(schedule.event_date);
+      time.textContent = schedule.event.event_time;
 
       if (schedule.event.favorite_button_html) {
         favoriteButtonSlot.innerHTML = schedule.event.favorite_button_html;
@@ -179,17 +199,37 @@
       const detail_image = detail.querySelector(".detail-image");
       const detail_name = detail.querySelector(".detail-name");
       const detail_date = detail.querySelector(".detail-date");
+      const detail_time = detail.querySelector(".detail-time");
       const detail_address = detail.querySelector(".detail-address");
       const detail_description = detail.querySelector(".detail-description");
+      const detail_store_count_wrapper = detail.querySelector(".detail-store-count-wrapper");
+      const detail_store_count = detail.querySelector(".detail-store-count");
+      const detail_url_wrapper = detail.querySelector(".detail-url-wrapper");
+      const detail_url = detail.querySelector(".detail-url");
       const favoriteButtonSlot = detail.querySelector(".favorite-button-slot");
 
       detail_image.src = schedule.event.image_url;
       detail_image.alt = schedule.event.name;
 
       detail_name.textContent = schedule.event.name;
-      detail_date.textContent = schedule.event_date;
+      detail_date.textContent = formatEventDate(schedule.event_date);
+      detail_time.textContent = schedule.event.event_time;
       detail_address.textContent = schedule.event.address;
       detail_description.textContent = schedule.event.description;
+
+      // 出店数・イベントURLは未登録（null）の場合、該当項目ごと非表示にする
+      if (schedule.event.store_count) {
+        detail_store_count.textContent = schedule.event.store_count;
+      } else {
+        detail_store_count_wrapper.classList.add("hidden");
+      }
+
+      if (schedule.event.event_url) {
+        detail_url.textContent = schedule.event.event_url;
+        detail_url.href = schedule.event.event_url;
+      } else {
+        detail_url_wrapper.classList.add("hidden");
+      }
 
       if (schedule.event.favorite_button_html) {
         favoriteButtonSlot.innerHTML = schedule.event.favorite_button_html;

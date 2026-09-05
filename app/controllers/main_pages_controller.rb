@@ -43,6 +43,9 @@ class MainPagesController < ApplicationController
         name: event.name,
         description: event.description,
         address: event.address,
+        event_time: event.event_time,
+        store_count: event.store_count,
+        event_url: event.event_url,
         image_url: event.event_image_url,
         favorite_button_html: current_user ? render_to_string(
           partial: "favorites/favorite_button",
