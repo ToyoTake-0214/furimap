@@ -12,6 +12,9 @@ ja:
         latitude: 緯度
         longitude: 経度
         event_image: イベント画像
+        event_time: 開催時間
+        store_count: 出店数
+        event_url: イベントURL
 
       event_schedule:
         event_date: 開催日
