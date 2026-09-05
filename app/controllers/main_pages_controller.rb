@@ -7,6 +7,13 @@ class MainPagesController < ApplicationController
     @favorites_by_event_id = current_user ? current_user.favorites.index_by(&:event_id) : {}
 
     @locations_for_map = build_locations_for_map(@events)
+
+    if current_user
+      favorite_events = current_user.favorite_events.where.not(latitude: nil, longitude: nil).includes(:event_schedules)
+      @favorite_locations_for_map = build_locations_for_map(favorite_events)
+    else
+      @favorite_locations_for_map = []
+    end
   end
 
   private
