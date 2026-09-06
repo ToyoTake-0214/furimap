@@ -15,11 +15,11 @@
         開催日
       </p>
 
-      <div class="mt-1">
+      <div class="mt-1 flex flex-wrap gap-x-3 gap-y-1">
         <% favorite.event.event_schedules.order(:event_date).each do |schedule| %>
-          <p class="text-base-content/70">
+          <span class="text-base-content/70">
             <%= schedule.event_date %>
-          </p>
+          </span>
         <% end %>
       </div>
     </div>
