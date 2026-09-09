@@ -4,8 +4,8 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+one:
+  user: one
+  address: 東京駅
+  name: 東京駅フリーマーケット
+  event_time: 10:00~12:00
