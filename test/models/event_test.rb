@@ -138,4 +138,15 @@ class EventTest < ActiveSupport::TestCase
     event.event_url = "https://example.com/" + "a" * 480   # 20文字 + 480文字 = 500文字
     assert event.valid?, event.errors.full_messages.join(", ")
   end
+
+  # アソシエーションが正しく機能するかテスト
+  test "紐づくuserを取得できること" do
+    event = events(:one)
+    assert_equal event.user, users(:one)
+  end
+
+  test "紐づくevent_schedulesを取得できること" do
+  event = events(:one)
+  assert_includes event.event_schedules, event_schedules(:one)
+  end
 end
