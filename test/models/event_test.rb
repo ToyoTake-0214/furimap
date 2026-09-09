@@ -6,6 +6,7 @@ class EventTest < ActiveSupport::TestCase
     assert event.valid?, event.errors.full_messages.join(", ")
    end
 
+  # Event必須項目(presence)の空テスト
   test "nameが空の場合はinvalidであること" do
     event = events(:one)
     event.name = ""
@@ -24,6 +25,7 @@ class EventTest < ActiveSupport::TestCase
     assert_not event.valid?, event.errors.full_messages.join(", ")
   end
 
+  # 文字数バリデーション（境界値）のテスト
   test "nameが51文字以上の場合はinvalidであること" do
     event = events(:one)
     event.name = "a" * 51
@@ -69,6 +71,71 @@ class EventTest < ActiveSupport::TestCase
   test "event_timeが50文字の場合はvalidであること" do
     event = events(:one)
     event.event_time = "a" * 50
+    assert event.valid?, event.errors.full_messages.join(", ")
+  end
+
+  # store_count（数値バリデーション）のテスト
+  test "store_countがnilの場合はvalidであること" do
+    event = events(:one)
+    event.store_count = nil
+    assert event.valid?, event.errors.full_messages.join(", ")
+  end
+
+  test "store_countが正の整数の場合はvalidであること" do
+    event = events(:one)
+    event.store_count = 1
+    assert event.valid?, event.errors.full_messages.join(", ")
+
+    event.store_count = 5
+    assert event.valid?, event.errors.full_messages.join(", ")
+  end
+
+  test "store_countが0の場合はinvalidであること" do
+    event = events(:one)
+    event.store_count = 0
+    assert_not event.valid?, event.errors.full_messages.join(", ")
+  end
+
+  test "store_countが負の値の場合はinvalidであること" do
+    event = events(:one)
+    event.store_count = -1
+    assert_not event.valid?, event.errors.full_messages.join(", ")
+  end
+
+  test "store_countが正の整数でない場合はinvalidであること" do
+    event = events(:one)
+    event.store_count = 1.5
+    assert_not event.valid?, event.errors.full_messages.join(", ")
+  end
+
+  # event_url（形式バリデーション）のテスト
+  test "event_urlがnilの場合はvalidであること" do
+    event = events(:one)
+    event.event_url = nil
+    assert event.valid?, event.errors.full_messages.join(", ")
+  end
+
+  test "event_urlが正しいURLの場合はvalidであること" do
+    event = events(:one)
+    event.event_url = "https://example.com"
+    assert event.valid?, event.errors.full_messages.join(", ")
+  end
+
+  test "event_urlが不正な形式のURLの場合はinvalidであること" do
+    event = events(:one)
+    event.event_url = "hts://example.com"
+    assert_not event.valid?, event.errors.full_messages.join(", ")
+  end
+
+  test "event_urlが501文字の場合はinvalidであること" do
+    event = events(:one)
+    event.event_url = "https://example.com/" + "a" * 481   # 20文字 + 481文字 = 501文字
+    assert_not event.valid?, event.errors.full_messages.join(", ")
+  end
+
+  test "event_urlが500文字の場合はvalidであること" do
+    event = events(:one)
+    event.event_url = "https://example.com/" + "a" * 480   # 20文字 + 480文字 = 500文字
     assert event.valid?, event.errors.full_messages.join(", ")
   end
 end
