@@ -2,3 +2,18 @@
 @plugin "daisyui" {
   themes: cupcake --default;
 }
+
+/*
+ * iOS Safariでは input[type="date"] が空のとき placeholder が効かず
+ * 何も表示されないため、疑似要素で代わりに表示する
+ */
+input[type="date"]:not(:valid)::before {
+  content: attr(placeholder);
+  color: var(--color-base-content, currentColor);
+  opacity: 0.5;
+}
+
+input[type="date"]:valid::before,
+input[type="date"]:focus::before {
+  content: "";
+}
