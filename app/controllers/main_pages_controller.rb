@@ -46,11 +46,7 @@ class MainPagesController < ApplicationController
         event_time: event.event_time,
         store_count: event.store_count,
         event_url: event.event_url,
-        image_url: event.event_image_url,
-        favorite_button_html: current_user ? render_to_string(
-          partial: "favorites/favorite_button",
-          locals: { event: event, favorite: @favorites_by_event_id[event.id] }
-        ) : nil
+        image_url: event.event_image_url
       }
     }
   end

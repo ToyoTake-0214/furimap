@@ -1,6 +1,14 @@
 <script id="map-locations-data" type="application/json"><%= raw json_escape(@locations_for_map.to_json) %></script>
 <script id="favorite-locations-data" type="application/json"><%= raw json_escape(@favorite_locations_for_map.to_json) %></script>
 
+<% if current_user&.general? %>
+  <div id="favorite-button-originals" class="hidden">
+    <% @events.each do |event| %>
+      <%= render "favorites/favorite_button", event: event, favorite: @favorites_by_event_id[event.id] %>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="flex flex-1 flex-col">
   <div class="flex flex-nowrap justify-center items-center my-2 gap-2 px-4 overflow-x-auto">
     <label for="event-date-search" class="text-sm text-base-content/60 whitespace-nowrap">開催日から探す</label>
@@ -122,6 +130,9 @@
       ? JSON.parse(favoriteLocationsDataElement.textContent)
       : [];
 
+    // お気に入りボタンの原本（保存・解除のたびにTurbo Streamで最新化される）
+    const originalsContainer = document.getElementById("favorite-button-originals");
+
     // プレビュー用要素
     const eventDetail = document.getElementById("event-detail");
     const schedulesContainer = document.getElementById("event-detail-schedules");
@@ -186,8 +197,9 @@
       date.textContent = formatEventDate(schedule.event_date);
       time.textContent = schedule.event.event_time;
 
-      if (schedule.event.favorite_button_html) {
-        favoriteButtonSlot.innerHTML = schedule.event.favorite_button_html;
+      const originalButton = originalsContainer?.querySelector(`.favorite-button-event-${schedule.event.id}`);
+      if (originalButton) {
+        favoriteButtonSlot.innerHTML = originalButton.outerHTML;
       }
 
       return card;
@@ -231,8 +243,9 @@
         detail_url_wrapper.classList.add("hidden");
       }
 
-      if (schedule.event.favorite_button_html) {
-        favoriteButtonSlot.innerHTML = schedule.event.favorite_button_html;
+      const originalButton = originalsContainer?.querySelector(`.favorite-button-event-${schedule.event.id}`);
+      if (originalButton) {
+        favoriteButtonSlot.innerHTML = originalButton.outerHTML;
       }
 
       return detail;
