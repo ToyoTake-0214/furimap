@@ -175,7 +175,7 @@ URL [https://menew.jp/](https://www.walkerplus.com/)
 | 技術                   | 選定理由                                                          |
 | -------------------- | ------------------------------------------------------------- |
 | Ruby 3.4.x           | 可読性が高く、Ruby on Railsとの親和性に優れているため。                            |
-| Ruby on Rails 7.2.x  | MVCアーキテクチャを活用し、イベント投稿・ユーザー管理・認証機能などを効率的に開発できるため。              |
+| Ruby on Rails 8.1.x  | MVCアーキテクチャを活用し、イベント投稿・ユーザー管理・認証機能などを効率的に開発できるため。              |
 | Devise               | ログイン・新規登録・パスワード再設定などの認証機能を、安全かつ短期間で実装するため。                    |
 | ActiveRecord         | Rails標準のORMとして、イベント情報やユーザー情報などのデータ操作をシンプルに実装できるため。            |
 | CarrierWave            | イベント画像のアップロード処理を実装し、画像の保存先やファイル管理を柔軟に設定できるため。 |
@@ -293,7 +293,8 @@ https://www.figma.com/design/I79trJRF5sYR5gMWZ7SNbT/FuriMAP_%E7%94%BB%E9%9D%A2%E
 
 ## ER図
 draw.io：<br>
-<img width="571" height="552" alt="ER図(frimap) (1)" src="https://github.com/user-attachments/assets/84be1a8b-e570-4e1d-8074-94e29604673f" />
+<img width="798" height="672" alt="ER図(frimap) drawio (5)" src="https://github.com/user-attachments/assets/3ca412f4-78b4-400d-ae48-97a2435c260c" />
+
 
 
 
