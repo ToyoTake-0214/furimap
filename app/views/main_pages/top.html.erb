@@ -12,7 +12,7 @@
 <div class="flex flex-1 flex-col">
   <div class="flex flex-nowrap justify-center items-center my-2 gap-2 px-4 overflow-x-auto">
     <label for="event-date-search" class="text-sm text-base-content/60 whitespace-nowrap">開催日から探す</label>
-    <input type="date" id="event-date-search" class="input" placeholder="年/月/日">
+    <input type="text" id="event-date-search" class="input" placeholder="年/月/日">
 
     <select id="prefecture-select" class="select">
       <option value="" selected disabled>エリアから探す</option>
@@ -144,6 +144,17 @@
     // 検索用の検索情報
     const dateSearchElement = document.getElementById("event-date-search");
     const favoriteOnlyButton = document.getElementById("favorite-only-toggle");
+
+    // iOS Safariではinput[type="date"]が空のときplaceholderが表示されないため、
+    // 空の間はtype="text"にしてplaceholderを表示し、操作時だけtype="date"に切り替える
+    dateSearchElement.addEventListener("focus", () => {
+      dateSearchElement.type = "date";
+    });
+    dateSearchElement.addEventListener("blur", () => {
+      if (!dateSearchElement.value) {
+        dateSearchElement.type = "text";
+      }
+    });
 
     // 一覧に戻るために、表示していた開催日カードの一覧を覚えておくための変数
     let currentSchedules = [];
