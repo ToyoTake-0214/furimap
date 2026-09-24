@@ -34,8 +34,18 @@
     <% end %>
 
     <%# deivseのフラッシュメッセージを表示 %>
-    <p><%= notice %></p>
-    <p><%= alert %></p>
+    <% if notice.present? %>
+      <div class="alert alert-success mx-4 mt-2 w-auto" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span><%= notice %></span>
+      </div>
+    <% end %>
+    <% if alert.present? %>
+      <div class="alert alert-error mx-4 mt-2 w-auto" role="alert">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
+        <span><%= alert %></span>
+      </div>
+    <% end %>
 
     <main class="flex flex-1 flex-col">
       <%= yield %>
