@@ -12,7 +12,10 @@
 <div class="flex flex-1 flex-col">
   <div class="flex flex-nowrap justify-center items-center my-2 gap-2 px-4 overflow-x-auto">
     <label for="event-date-search" class="text-sm text-base-content/60 whitespace-nowrap">開催日から探す</label>
-    <input type="text" id="event-date-search" class="input" placeholder="年/月/日">
+    <div class="relative inline-flex">
+      <input type="date" id="event-date-search" class="input">
+      <span id="event-date-search-placeholder" class="pointer-events-none absolute inset-y-0 left-3 items-center text-sm text-base-content/50">年/月/日</span>
+    </div>
 
     <select id="prefecture-select" class="select">
       <option value="" selected disabled>エリアから探す</option>
@@ -21,9 +24,8 @@
           <%= pref["name"] %>
         </option>
       <% end %>
-    </select> 
+    </select>
   </div>
-
 
   <div class="relative flex-1">
     <div id="map" class="absolute inset-0"></div>
@@ -143,18 +145,22 @@
 
     // 検索用の検索情報
     const dateSearchElement = document.getElementById("event-date-search");
+    const dateSearchPlaceholder = document.getElementById("event-date-search-placeholder");
     const favoriteOnlyButton = document.getElementById("favorite-only-toggle");
 
     // iOS Safariではinput[type="date"]が空のときplaceholderが表示されないため、
-    // 空の間はtype="text"にしてplaceholderを表示し、操作時だけtype="date"に切り替える
-    dateSearchElement.addEventListener("focus", () => {
-      dateSearchElement.type = "date";
-    });
-    dateSearchElement.addEventListener("blur", () => {
-      if (!dateSearchElement.value) {
-        dateSearchElement.type = "text";
-      }
-    });
+    // 別要素(#event-date-search-placeholder)を重ねて代わりに表示する。
+    // type自体は常に"date"のままにして、1タップでネイティブの日付ピッカーが開けるようにする。
+    function updateDateSearchPlaceholder() {
+      const isFocused = document.activeElement === dateSearchElement;
+      dateSearchPlaceholder.hidden = !!dateSearchElement.value || isFocused;
+    }
+    dateSearchElement.addEventListener("input", updateDateSearchPlaceholder);
+    dateSearchElement.addEventListener("focus", updateDateSearchPlaceholder);
+    dateSearchElement.addEventListener("blur", updateDateSearchPlaceholder);
+    // ブラウザの「戻る」でページがbfcacheから復元された場合も表示状態を合わせる
+    window.addEventListener("pageshow", updateDateSearchPlaceholder);
+    updateDateSearchPlaceholder();
 
     // 一覧に戻るために、表示していた開催日カードの一覧を覚えておくための変数
     let currentSchedules = [];
@@ -419,9 +425,9 @@
       return filteredLocations;
     }
     // 絞り込みを変更する
-      dateSearchElement.addEventListener("change", () => {
-        renderMarkers(filterLocations());
-      });
+    dateSearchElement.addEventListener("change", () => {
+      renderMarkers(filterLocations());
+    });
   }
 </script>
 
