@@ -2,3 +2,17 @@
 @plugin "daisyui" {
   themes: cupcake --default;
 }
+
+/*
+ * PC（マウス操作）ではinput[type="date"]が空でもブラウザが自前でヒントを表示するため、
+ * #event-date-search-placeholderを重ねると二重表示になる。
+ * タッチ操作の端末（スマホ等）だけ表示するようにする。
+ */
+#event-date-search-placeholder {
+  display: none;
+}
+@media (pointer: coarse) {
+  #event-date-search-placeholder:not([hidden]) {
+    display: flex;
+  }
+}

@@ -14,7 +14,7 @@
     <label for="event-date-search" class="text-sm text-base-content/60 whitespace-nowrap">開催日から探す</label>
     <div class="relative inline-flex">
       <input type="date" id="event-date-search" class="input">
-      <span id="event-date-search-placeholder" class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-sm text-base-content/50">年/月/日</span>
+      <span id="event-date-search-placeholder" class="pointer-events-none absolute inset-y-0 left-3 items-center text-sm text-base-content/50">年/月/日</span>
     </div>
 
     <select id="prefecture-select" class="select">
@@ -24,9 +24,8 @@
           <%= pref["name"] %>
         </option>
       <% end %>
-    </select> 
+    </select>
   </div>
-
 
   <div class="relative flex-1">
     <div id="map" class="absolute inset-0"></div>
@@ -426,9 +425,9 @@
       return filteredLocations;
     }
     // 絞り込みを変更する
-      dateSearchElement.addEventListener("change", () => {
-        renderMarkers(filterLocations());
-      });
+    dateSearchElement.addEventListener("change", () => {
+      renderMarkers(filterLocations());
+    });
   }
 </script>
 
