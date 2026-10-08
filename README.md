@@ -419,3 +419,6 @@ marker.addListener("click", () => {
 * マーカークリック時のイベント情報表示
 
 を実現できることを確認し、本アプリへ実装した。
+
+## 11. 画面遷移図
+[Figma：フリマップ画面遷移図](https://www.figma.com/design/GCFWq0rjEmZjPU7mTfrFBn/FuriMap_ScreenFlow?node-id=2008-26&p=f&t=LqAa05ARijFBFz6a-0)
