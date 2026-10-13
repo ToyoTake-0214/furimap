@@ -422,3 +422,6 @@ marker.addListener("click", () => {
 
 ## 11. 画面遷移図
 [Figma：フリマップ画面遷移図](https://www.figma.com/design/GCFWq0rjEmZjPU7mTfrFBn/FuriMap_ScreenFlow?node-id=2008-26&p=f&t=LqAa05ARijFBFz6a-0)
+
+## 12. ER図
+<img width="798" height="672" alt="ER図" src="https://github.com/user-attachments/assets/4b09c522-6fc0-458d-af68-1d410388b2ff" />
