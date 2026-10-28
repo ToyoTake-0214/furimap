@@ -61,6 +61,7 @@ group :test do
   gem "selenium-webdriver"
 
   gem "faker"
+  gem "simplecov", require: false, group: :test
 end
 
 gem "devise"
