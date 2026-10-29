@@ -98,4 +98,18 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "アソシエーション" do
+    it "お気に入りしたイベントを取得できること" do
+      favorite = create(:favorite)
+      expect(favorite.user.favorite_events).to include(favorite.event)
+    end
+
+    context "ユーザーを削除した場合" do
+      it "お気に入りも削除されること" do
+        favorite = create(:favorite)
+        expect { favorite.user.destroy }.to change(Favorite, :count).by(-1)
+      end
+    end
+  end
 end
