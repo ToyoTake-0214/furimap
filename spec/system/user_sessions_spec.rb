@@ -24,6 +24,18 @@ RSpec.describe "UserSessions", type: :system do
         expect(page).to have_content("メールアドレスまたはパスワードが違います。")
       end
     end
+
+    context "ロールが間違っている場合" do
+      it "ログインできず、エラーメッセージが表示されること" do
+        general = create(:user, role: "general")
+        visit new_user_session_path
+        fill_in "メールアドレス", with: general.email
+        fill_in "パスワード", with: general.password
+        click_button "ログイン"
+        expect(page).to have_current_path new_user_session_path
+        expect(page).to have_content("メールアドレスまたはパスワードが違います。")
+      end
+    end
   end
 
   describe "一般ユーザー" do
