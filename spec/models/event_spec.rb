@@ -197,6 +197,43 @@ RSpec.describe Event, type: :model do
     end
   end
 
+  describe "アソシエーション" do
+    it "userに紐づいていること" do
+      user = create(:user)
+      event = build(:event, user: user)
+      expect(event.user).to eq(user)
+    end
+
+    it "お気に入りしたユーザーを取得できること" do
+      favorite = create(:favorite)
+      expect(favorite.event.favorited_by_users).to include(favorite.user)
+    end
+
+    it "日程を日付の早い順に取得できること" do
+      event = create(:event)
+      schedule_in_3_days = create(:event_schedule, event: event, event_date: Date.current + 3)
+      schedule_in_1_day = create(:event_schedule, event: event, event_date: Date.current + 1)
+      schedule_in_2_days = create(:event_schedule, event: event, event_date: Date.current + 2)
+      expect(event.event_schedules).to eq([ schedule_in_1_day, schedule_in_2_days, schedule_in_3_days ])
+    end
+
+    context "イベントを削除した場合" do
+      it "日程も削除されること" do
+        event = create(:event)
+        create(:event_schedule, event: event)
+
+        expect { event.destroy }.to change(EventSchedule, :count).by(-1)
+      end
+
+      it "お気に入りも削除されること" do
+        event = create(:event)
+        create(:favorite, event: event)
+
+        expect { event.destroy }.to change(Favorite, :count).by(-1)
+      end
+    end
+  end
+
   describe "ジオコーディング" do
     context "新しく作成した場合" do
       it "住所から緯度経度が設定されること" do
