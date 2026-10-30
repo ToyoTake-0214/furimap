@@ -16,7 +16,7 @@
       </p>
 
       <div class="mt-1">
-        <% event.event_schedules.order(:event_date).each do |schedule| %>
+        <% event.event_schedules.each do |schedule| %>
           <p class="text-base-content/70">
             <%= schedule.event_date %>
           </p>

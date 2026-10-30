@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :require_organizer!
   before_action :set_event, only: [ :edit, :update, :destroy ]
   def index
-    @events = current_user.events.order(created_at: :desc)
+    @events = current_user.events.includes(:event_schedules).order(created_at: :desc)
   end
 
   def new
