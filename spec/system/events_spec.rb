@@ -67,4 +67,34 @@ RSpec.describe "Events", type: :system do
       end
     end
   end
+
+  describe "イベントの編集" do
+    context "イベント名を変更した場合" do
+      it "更新でき、一覧に変更したイベント名が表示されること" do
+        user = create(:user)
+        event = create(:event, user: user)
+        sign_in user
+        visit edit_event_path(event)
+        fill_in "イベント名", with: "新しいフリマ"
+        expect { click_button "更新する" }.not_to change(Event, :count)
+        expect(page).to have_current_path events_path
+        expect(event.reload.name).to eq("新しいフリマ")
+        expect(page).to have_content("新しいフリマ")
+      end
+    end
+
+    context "イベント名を空にした場合" do
+      it "更新できず、エラーメッセージが表示されること" do
+        user = create(:user)
+        event = create(:event, user: user)
+        sign_in user
+        visit edit_event_path(event)
+        fill_in "イベント名", with: ""
+        click_button "更新する"
+        expect(page).to have_current_path event_path(event)
+        expect(event.reload.name).to eq("東京駅フリーマーケット")
+        expect(page).to have_content("イベント名を入力してください")
+      end
+    end
+  end
 end
