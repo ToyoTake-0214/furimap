@@ -32,4 +32,39 @@ RSpec.describe "Events", type: :system do
       end
     end
   end
+
+  describe "イベントの閲覧" do
+    context "自分のイベントが登録されている場合" do
+      it "イベント名と開催日が表示されること" do
+        user = create(:user)
+        event = create(:event, user: user)
+        event_schedule = create(:event_schedule, event: event)
+        sign_in user
+        visit events_path
+        expect(page).to have_content(event.name)
+        expect(page).to have_content(event_schedule.event_date.to_s)
+      end
+    end
+
+    context "他の主催者のイベントが登録されている場合" do
+      it "他者のイベントは表示されないこと" do
+        user = create(:user)
+        my_event = create(:event, user: user)
+        other_event = create(:event, name: "他の主催者のフリマ")
+        sign_in user
+        visit events_path
+        expect(page).not_to have_content(other_event.name)
+        expect(page).to have_content(my_event.name)
+      end
+    end
+
+    context "イベントが登録されていない場合" do
+      it "「最初のフリーマーケットを登録する」が表示されること" do
+        user = create(:user)
+        sign_in user
+        visit events_path
+        expect(page).to have_content("最初のフリーマーケットを登録する")
+      end
+    end
+  end
 end
