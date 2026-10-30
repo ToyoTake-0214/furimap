@@ -50,7 +50,7 @@ class EventsController < ApplicationController
   end
 
   def prepare_event_schedules
-    remaining_count = [ 10 - @event.event_schedules.size, 0 ].max
+    remaining_count = [ Event::MAX_EVENT_SCHEDULES - @event.event_schedules.size, 0 ].max
     remaining_count.times { @event.event_schedules.build }
   end
 
