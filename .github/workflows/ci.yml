@@ -69,6 +69,18 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: yarn
+
+      - name: Install JavaScript dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build assets
+        run: yarn build && yarn build:css
+
       - name: Run RSpecs
         env:
           RAILS_ENV: test
