@@ -20,7 +20,7 @@
       </p>
 
       <div class="mt-1 flex flex-wrap gap-x-3 gap-y-1">
-        <% favorite.event.event_schedules.order(:event_date).each do |schedule| %>
+        <% favorite.event.event_schedules.each do |schedule| %>
           <span class="text-base-content/70">
             <%= schedule.event_date %>
           </span>
