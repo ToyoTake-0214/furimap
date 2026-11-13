@@ -354,11 +354,12 @@
           },
           map: map,
           icon: {
-            url: "<%= asset_path('furima_marker.png') %>",
+            // 今日以降の開催日がない地点はグレーのマーカーで表示する
+            url: hasUpcomingSchedule(location.schedules)
+              ? "<%= asset_path('furima_marker.png') %>"
+              : "<%= asset_path('furima_marker_gray.png') %>",
             scaledSize: new google.maps.Size(40, 60)
-          },
-          // 今日以降の開催日がない地点は薄く表示する
-          opacity: hasUpcomingSchedule(location.schedules) ? 1 : 0.4
+          }
         });
 
         marker.addListener("click", () => {
