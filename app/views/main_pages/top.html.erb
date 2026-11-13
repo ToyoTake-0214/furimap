@@ -197,6 +197,23 @@
       return `${year}年${Number(month)}月${Number(day)}日`;
     }
 
+    // 今日の日付を「2026-09-05」のような文字列で返す
+    // toISOString()はUTCで日付を作り、日本時間の0時〜9時に前日になってしまうため、ブラウザのローカル日付から組み立てる
+    function formatTodayDate() {
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = String(today.getMonth() + 1).padStart(2, "0");
+      const day = String(today.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    // 地点のschedulesに今日以降の開催日があるかを判定する
+    // event_dateは「YYYY-MM-DD」形式の文字列のため、文字列のまま日付の前後を比較できる
+    function hasUpcomingSchedule(schedules) {
+      const today = formatTodayDate();
+      return schedules.some((schedule) => schedule.event_date >= today);
+    }
+
     // 開催日カードを作る
     function buildScheduleCard(schedule) {
       const card = scheduleTemplate.content.cloneNode(true);
